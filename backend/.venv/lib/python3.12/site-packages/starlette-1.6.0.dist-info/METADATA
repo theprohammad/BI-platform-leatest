@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: starlette
-Version: 1.4.1
+Version: 1.6.0
 Summary: The little ASGI library that shines.
 Project-URL: Homepage, https://github.com/Kludex/starlette
 Project-URL: Documentation, https://starlette.dev/

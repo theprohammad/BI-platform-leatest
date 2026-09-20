@@ -25,8 +25,8 @@ class Settings(BaseSettings):
 
     # --- LLM routing tiers (Blueprint Part VIII) ----------------------------
     model_extract: str = "llama-3.1-8b-instant"
-    model_reason: str = "llama-3.3-70b-versatile"
-    model_judge: str = "llama-3.3-70b-versatile"
+    model_reason: str = "openai/gpt-oss-120b"
+    model_judge: str = "openai/gpt-oss-120b"
     llm_timeout_seconds: float = 60.0
     llm_max_retries: int = 1  # one JSON-repair retry
     llm_temperature: float = 0.2

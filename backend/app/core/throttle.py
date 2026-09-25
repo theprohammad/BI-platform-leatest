@@ -4,7 +4,7 @@ concurrency-limited async execution queue with 429-aware exponential backoff.
 This is an internal optimization layer (allowed extension) — it changes no
 public API and no provider interface. The LLM router and search provider call
 into it to (a) reuse identical work instead of repeating it, and (b) cap
-in-flight provider requests so we stop flooding Groq into 429 storms.
+in-flight provider requests so we stop flooding the NVIDIA endpoint during 429 storms.
 
 Design notes
 ------------
@@ -12,7 +12,7 @@ Design notes
   caller (dicts/lists), so cache entries are never mutated by consumers.
 * The queue is a global semaphore per provider-class, not per-router-instance,
   because every research run builds its own LLMRouter but they all share the
-  same upstream Groq account and the same rate limit.
+  same upstream NVIDIA account and the same rate limit.
 * Backoff is exponential with full jitter, and specifically lengthened when the
   provider signals 429 / rate limit, which is the exact failure the spec calls
   out. We never "solve 429 by adding fixed delays" — throttling is adaptive and
@@ -182,7 +182,7 @@ class RequestQueue:
 # account with a single rate limit.
 llm_cache = TTLCache(ttl_seconds=1800.0)       # 30 min: reasoning is stable
 search_cache = TTLCache(ttl_seconds=3600.0)    # 60 min: web results change slowly
-llm_queue = RequestQueue(max_concurrent=4)     # cap concurrent Groq calls
+llm_queue = RequestQueue(max_concurrent=4)     # cap concurrent NVIDIA calls
 
 
 def configure_llm_queue(max_concurrent: int) -> None:

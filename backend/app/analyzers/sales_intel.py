@@ -6,7 +6,7 @@ CRM, and personalized outreach. Contact discovery extracts only PUBLIC signals
 (social profiles, leadership names when present in structured data); emails are
 marked found/not_found and never fabricated.
 
-AI outreach uses the real Groq-backed LLM router, grounded strictly in the
+AI outreach uses the real NVIDIA-backed LLM router, grounded strictly in the
 collected enrichment (Rule 5: evidence-backed, no hallucinated facts).
 """
 from __future__ import annotations
@@ -88,7 +88,7 @@ async def generate_outreach_email(ctx_llm, *, lead: dict, kind: str = "cold",
                                   competitor_context: str | None = None) -> dict:
     """Generate a personalized outreach email grounded in REAL enrichment.
 
-    ctx_llm is an LLMRouter (Groq-backed, queued/cached). The prompt is built
+    ctx_llm is an LLMRouter (NVIDIA-backed, queued/cached). The prompt is built
     only from collected facts; the model is instructed not to invent specifics.
     """
     enrichment = lead.get("enrichment", {}) or {}

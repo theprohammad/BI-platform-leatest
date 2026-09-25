@@ -1408,7 +1408,7 @@ class EmailIn(BaseModel):
 @router.post("/sales/leads/{lead_id}/email")
 async def sales_generate_email(lead_id: str, body: EmailIn):
     """Generate a personalized outreach email grounded in the lead's REAL
-    enrichment via the Groq-backed LLM router. Requires a live LLM key; returns
+    enrichment via the NVIDIA-backed LLM router. Requires a live LLM key; returns
     a clear message if unavailable rather than a fabricated email."""
     lead = await db.get_lead(WORKSPACE, lead_id)
     if lead is None:

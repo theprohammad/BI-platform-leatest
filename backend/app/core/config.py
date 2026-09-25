@@ -18,15 +18,17 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     # --- providers (Blueprint rule 6: replaceable behind interfaces) -------
-    llm_provider: str = "groq"
+    llm_provider: str = "nvidia"
     search_provider: str = "tavily"
-    groq_api_key: str = ""
+    nvidia_api_key: str = ""
+    nvidia_base_url: str = "https://integrate.api.nvidia.com/v1"
+    groq_api_key: str = ""  # legacy compatibility; prefer NVIDIA settings
     tavily_api_key: str = ""
 
     # --- LLM routing tiers (Blueprint Part VIII) ----------------------------
-    model_extract: str = "llama-3.1-8b-instant"
-    model_reason: str = "openai/gpt-oss-120b"
-    model_judge: str = "openai/gpt-oss-120b"
+    model_extract: str = "meta/llama-3.2-11b-vision-instruct"
+    model_reason: str = "meta/llama-3.2-11b-vision-instruct"
+    model_judge: str = "meta/llama-3.2-11b-vision-instruct"
     llm_timeout_seconds: float = 60.0
     llm_max_retries: int = 1  # one JSON-repair retry
     llm_temperature: float = 0.2

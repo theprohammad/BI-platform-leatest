@@ -1,6 +1,6 @@
 """LLM provider interface (Blueprint rule 6: provider independence).
 
-Any provider (Groq, OpenAI, Anthropic, Gemini, ...) implements this protocol.
+Any provider (NVIDIA, OpenAI, Anthropic, Gemini, ...) implements this protocol.
 Nothing outside app/providers may import a vendor SDK.
 """
 from dataclasses import dataclass

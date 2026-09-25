@@ -58,7 +58,7 @@ class LLMRouter:
 
         for attempt in range(s.llm_max_retries + 1):
             try:
-                # ---- Queued execution: bounds concurrent Groq calls + backoff
+                # ---- Queued execution: bounds concurrent NVIDIA calls + backoff
                 result = await llm_queue.run(
                     lambda: asyncio.wait_for(
                         self._provider.complete_json(
@@ -99,6 +99,10 @@ class LLMRouter:
 
 def build_provider() -> LLMProvider:
     s = get_settings()
+    if s.llm_provider in {"nvidia", "openai"}:
+        from app.providers.llm.nvidia_provider import NvidiaProvider
+        api_key = s.nvidia_api_key or s.groq_api_key
+        return NvidiaProvider(api_key=api_key, base_url=s.nvidia_base_url)
     if s.llm_provider == "groq":
         from app.providers.llm.groq_provider import GroqProvider
         return GroqProvider(api_key=s.groq_api_key)

@@ -5,10 +5,9 @@ Prices are config-shaped data; adjust as providers change.
 """
 from dataclasses import dataclass, field
 
-# USD per 1M tokens (indicative Groq pricing; update via ops, not code review)
+# USD per 1M tokens (indicative NVIDIA pricing; update via ops, not code review)
 PRICE_TABLE: dict[str, tuple[float, float]] = {
-    "openai/gpt-oss-120b": (0.59, 0.79),
-    "llama-3.1-8b-instant": (0.05, 0.08),
+    "meta/llama-3.2-11b-vision-instruct": (0.05, 0.08),
 }
 
 
